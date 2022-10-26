@@ -1,0 +1,4 @@
+[core]
+    remote = ssh-storage
+['remote "ssh-storage"']
+    url = ssh://andrey@192.168.1.2/opt/datasets
