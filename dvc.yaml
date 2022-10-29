@@ -20,3 +20,31 @@ stages:
     - scripts/data_scripts/change_text_to_numeric.py
     outs:
     - data/stage3
+  split:
+    cmd: python3 scripts/data_scripts/train_test_split.py data/stage3/train.csv
+    deps:
+    - data/stage3/train.csv
+    - scripts/data_scripts/train_test_split.py
+    params:
+    - split.split_ratio
+    outs:
+    - data/stage4
+  train:
+    cmd: python3 scripts/model_scripts/dt.py data/stage4/train.csv model.pkl
+    deps:
+    - data/stage4/train.csv
+    - scripts/model_scripts/dt.py
+    params:
+    - train.max_depth
+    - train.seed
+    outs:
+    - models/model.pkl
+  evaluate:
+    cmd: python3 scripts/model_scripts/evaluate.py data/stage4/test.csv models/model.pkl
+    deps:
+    - data/stage4/test.csv
+    - models/model.pkl
+    - scripts/model_scripts/evaluate.py
+    metrics:
+    - evaluate/score.json:
+        cache: false
