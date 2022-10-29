@@ -3,4 +3,4 @@ split:
 
 train:
   seed: 42
-  max_depth: 5
+  max_depth: 3
