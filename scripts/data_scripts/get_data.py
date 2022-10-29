@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+# Комментарий из VS Code
+
 from catboost.datasets import titanic
 
 train, test = titanic()
